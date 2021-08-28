@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chess board. Canvas API, JS/ES5</title>
+</head>
+ 
+<body>
+    <canvas id="renderCanvas" width="250" height="250" style="border: solid grey 2px"></canvas>
+ 
+    <script>
+        const canvas = document.getElementById("renderCanvas");
+        const ctx = canvas.getContext("2d");
+        const offset = 25;
+
+        ctx.font = "20px Arial";
+        ctx.fillStyle ="black"
+        ctx.fillText("8", offset / 2 - 5, offset * 2 - 8);
+        ctx.fillText("7", offset / 2 - 5, offset * 3 - 8);
+        ctx.fillText("6", offset / 2 - 5, offset * 4 - 8);
+        ctx.fillText("5", offset / 2 - 5, offset * 5 - 8);
+        ctx.fillText("4", offset / 2 - 5, offset * 6 - 8);
+        ctx.fillText("3", offset / 2 - 5, offset * 7 - 8);
+        ctx.fillText("2", offset / 2 - 5, offset * 8 - 8);
+        ctx.fillText("1", offset / 2 - 5, offset * 9 - 8);
+        // Letters
+        ctx.fillText("a", offset * 1 + 5, offset / 2 + 5);
+        ctx.fillText("b", offset * 2 + 5, offset / 2 + 5);
+        ctx.fillText("c", offset * 3 + 5, offset / 2 + 5);
+        ctx.fillText("d", offset * 4 + 5, offset / 2 + 5);
+        ctx.fillText("e", offset * 5 + 5, offset / 2 + 5);
+        ctx.fillText("f", offset * 6 + 5, offset / 2 + 5);
+        ctx.fillText("g", offset * 7 + 5, offset / 2 + 5);
+        ctx.fillText("h", offset * 8 + 5, offset / 2 + 5);
+ 
+        drawCell(offset, offset, "black");
+        drawCell(offset, offset * 3, "black");
+        drawCell(offset, offset * 5, "black");
+        drawCell(offset, offset * 7, "black");
+
+        drawCell(offset * 3, offset, "black");
+        drawCell(offset * 3, offset * 3, "black");
+        drawCell(offset * 3, offset * 5, "black");
+        drawCell(offset * 3, offset * 7, "black");
+
+        drawCell(offset * 2, offset * 2, "black");
+        drawCell(offset * 2, offset * 4, "black");
+        drawCell(offset * 2, offset * 6, "black");
+        drawCell(offset * 2, offset * 8, "black");
+        
+        drawCell(offset * 5, offset, "black");
+        drawCell(offset * 5, offset * 3, "black");
+        drawCell(offset * 5, offset * 5, "black");
+        drawCell(offset * 5, offset * 7, "black");
+
+        drawCell(offset * 6, offset * 2, "black");
+        drawCell(offset * 6, offset * 4, "black");
+        drawCell(offset * 6, offset * 6, "black");
+        drawCell(offset * 6, offset * 8, "black");
+
+        drawCell(offset * 7, offset, "black");
+        drawCell(offset * 7, offset * 3, "black");
+        drawCell(offset * 7, offset * 5, "black");
+        drawCell(offset * 7, offset * 7, "black");
+
+        drawCell(offset * 8, offset * 2, "black");
+        drawCell(offset * 8, offset * 4, "black");
+        drawCell(offset * 8, offset * 6, "black");
+        drawCell(offset * 8, offset * 8, "black");
+
+        drawCell(offset * 4, offset * 2, "black")
+        drawCell(offset * 4, offset * 4, "black");;
+        drawCell(offset * 4, offset * 6, "black");
+        drawCell(offset * 4, offset * 8, "black");
+
+        // shapes
+
+         ctx.font = "20px Arial";
+        ctx.fillStyle ="grey"
+        ctx.fillText("P", offset / 1 - -7, offset * 3 - 8);
+        ctx.fillText("p", offset / 1 - -32, offset * 3 - 8);
+        ctx.fillText("p", offset / 1 - -57, offset * 3 - 8);
+        ctx.fillText("p", offset / 1 - -85, offset * 3 - 8);
+        ctx.fillText("p", offset / 1 - -108, offset * 3 - 8);
+        ctx.fillText("p", offset / 1 - -132, offset * 3 - 8);
+        ctx.fillText("p", offset / 1 - -158, offset * 3 - 8);
+        ctx.fillText("p", offset / 1 - -183, offset * 3 - 8);
+
+        ctx.fillText("p", offset / 1 - -7, offset * 8 - 8);
+        ctx.fillText("p", offset / 1 - -32, offset * 8 - 8);
+        ctx.fillText("p", offset / 1 - -57, offset * 8 - 8);
+        ctx.fillText("p", offset / 1 - -85, offset * 8 - 8);
+        ctx.fillText("p", offset / 1 - -108, offset * 8 - 8);
+        ctx.fillText("p", offset / 1 - -132, offset * 8 - 8);
+        ctx.fillText("p", offset / 1 - -158, offset * 8 - 8);
+        ctx.fillText("p", offset / 1 - -183, offset * 8 - 8);
+
+        ctx.fillText("L", offset / 1 - -7, offset * 2 - 8);
+        ctx.fillText("k", offset / 1 - -32, offset * 2 - 8);
+        ctx.fillText("c", offset / 1 - -57, offset * 2 - 8);
+        ctx.fillText("f", offset / 1 - -85, offset * 2 - 8);
+        ctx.fillText("K", offset / 1 - -108, offset * 2 - 8);
+        ctx.fillText("c", offset / 1 - -132, offset * 2 - 8);
+        ctx.fillText("k", offset / 1 - -158, offset * 2 - 8);
+        ctx.fillText("L", offset / 1 - -183, offset * 2 - 8);
+    
+        ctx.fillText("L", offset / 1 - -7, offset * 9 - 8);
+        ctx.fillText("k", offset / 1 - -32, offset * 9 - 8);
+        ctx.fillText("c", offset / 1 - -57, offset * 9 - 8);
+        ctx.fillText("F", offset / 1 - -85, offset * 9 - 8);
+        ctx.fillText("K", offset / 1 - -108, offset * 9 - 8);
+        ctx.fillText("c", offset / 1 - -132, offset * 9 - 8);
+        ctx.fillText("k", offset / 1 - -158, offset * 9 - 8);
+        ctx.fillText("L", offset / 1 - -183, offset * 9 - 8);
+
+        // Borders
+        drawLine(offset * 9, offset, offset * 9, offset * 9); // Right border
+        drawLine(offset, offset, offset, offset * 9); // Left border
+        drawLine(offset, offset, offset * 9, offset); // Top border
+        drawLine(offset, offset * 9, offset * 9, offset * 9); // Top border
+ 
+        function drawCell(x, y, color)
+        {
+            ctx.beginPath();
+            ctx.rect(x, y, 25, 25);
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+ 
+        function drawLine(x0, y0, x1, y1)
+        {
+            ctx.beginPath();       // Start a new path
+            ctx.strokeStyle = "black";
+            ctx.moveTo(x0, y0);    // Move the pen to (x0, y0)
+            ctx.lineTo(x1, y1);    // Draw a line to (x1, y1)
+            ctx.stroke();          // Render the path
+        }
+    </script>
+</body>
+ 
+</html>
